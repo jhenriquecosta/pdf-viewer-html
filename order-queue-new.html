@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página de Pedido</title>
+<style>
+  /* Estilos CSS serão adicionados aqui */
+  /* Estilos gerais */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#container-pai {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Estilos do menu lateral */
+#menu-lateral ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+#menu-lateral li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#menu-lateral li.highlight {
+  background-color: blue;
+  color: white;
+}
+
+/* Estilos para as divs dinâmicas */
+.info-div {
+  display: none;
+  /* Estilos adicionais aqui */
+}
+
+/* Estilos para o container DADOSPEDIDO */
+#dados-pedido .panel {
+  border: 1px solid #ddd;
+  margin: 5px;
+  padding: 10px;
+}
+
+/* Estilos para o acordeão */
+#acordeao {
+  /* Estilos adicionais aqui */
+}
+
+/* Estilos para a row com duas colunas */
+.row {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+  padding: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<div id="container-pai">
+  <!-- Menu Lateral -->
+  <nav id="menu-lateral">
+    <ul>
+      <li id="negociacao">NEGOCIAÇÃO</li>
+      <li id="empresa">EMPRESA</li>
+      <li id="seriais">SERIAIS</li>
+      <li id="portabilidade">PORTABILIDADE</li>
+      <li id="historico">HISTÓRICO</li>
+    </ul>
+  </nav>
+  
+  <!-- Divs Dinâmicas -->
+  <div id="info-negociacao" class="info-div">Dados de NEGOCIAÇÃO</div>
+  <!-- As outras divs serão adicionadas aqui -->
+  
+  <!-- Container DADOSPEDIDO -->
+  <div id="dados-pedido">
+    <div class="panel" id="pedido">PEDIDO</div>
+    <div class="panel" id="estrutura-venda">ESTRUTURA DE VENDA</div>
+    <div class="panel" id="entrega">ENTREGA</div>
+  </div>
+  
+  <!-- Acordeão -->
+  <div id="acordeao">
+    <!-- Conteúdo do Acordeão -->
+  </div>
+  
+  <!-- Row com Duas Colunas -->
+  <div class="row">
+    <div class="col" id="checklist-triagem">CHECKLISTTRIAGEM</div>
+    <div class="col" id="obs">OBS</div>
+  </div>
+</div>
+
+<script>
+  // Código para interação do menu lateral
+ // Código para interação do menu lateral e realce do item
+document.addEventListener('DOMContentLoaded', function() {
+  var menuItems = document.querySelectorAll('#menu-lateral li');
+  menuItems.forEach(function(item) {
+    item.addEventListener('mouseover', function() {
+      // Remover realce de todos os itens
+      menuItems.forEach(function(menuItem) {
+        menuItem.classList.remove('highlight');
+      });
+
+      // Esconder todas as divs
+      document.querySelectorAll('.info-div').forEach(function(div) {
+        div.style.display = 'none';
+      });
+      
+      // Mostrar a div correspondente e realçar o item
+      this.classList.add('highlight');
+      var infoDiv = document.getElementById('info-' + this.id);
+      if (infoDiv) {
+        infoDiv.style.display = 'block';
+      }
+    });
+  });
+});
+
+
+</script>
+
+</body>
+</html>

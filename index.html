@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>PDF.js viewer</title>
+ 
+  </head>
+
+  <body>
+    <h2>PDF-VIEWER</h2>
+    
+  <input type="text" id="pdfId" placeholder="Enter PDF ID">
+  <button onclick="fetchPDF()">Fetch PDF</button>   
+    <iframe id="pdfViewer" style="display: none;" width="600px" height="" ></iframe>
+
+<script>
+    function loadPDF() {
+        const fileInput = document.getElementById('pdfFile');
+        const file = fileInput.files[0];
+        const fileURL = URL.createObjectURL(file);
+        const pdfViewer = document.getElementById('pdfViewer');
+        pdfViewer.src = "pdf-viewer.html?file=" + fileURL;
+        pdfViewer.style.display = 'block';
+    }
+
+    function fetchPDF() {
+        const idInput = document.getElementById('pdfId');
+        const id = idInput.value;
+        const endpoint = "https://localhost:7207/api/pdfmanager/pdf/" + id;
+        fetch(endpoint)
+            .then(response => response.blob())
+            .then(blob => {
+                const fileURL = URL.createObjectURL(blob);
+                const pdfViewer = document.getElementById('pdfViewer');
+                pdfViewer.src = fileURL;
+                pdfViewer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+
+  </body>
+</html>
